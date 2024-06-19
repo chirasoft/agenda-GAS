@@ -9,21 +9,25 @@
                 tabla.id = 'tablaContactos'
                 let tablaBody = document.createElement('tbody');
                 let tablaHeader = document.createElement('thead');
-                for(let i=0;i<obj.length;i++)
-                {
+                //llenar cabecera
+                let primeraFila = document.createElement('tr');
+                for (let ii = 0; ii < obj[0].length; ii++) {
+                    let celda = document.createElement('td');
+                    celda.textContent = obj[0][ii];
+                    primeraFila.appendChild(celda);
+                }
+                tablaHeader.appendChild(primeraFila);
+                tabla.appendChild(tablaHeader);
+                //llenar cuerpo de tabla
+                for (let i = 1; i < obj.length; i++) {
                     let fila = document.createElement('tr');
-                    for(let j=0; j<obj[i].length;j++)
-                    {
+                    for (let j = 0; j < obj[i].length; j++) {
                         let celda = document.createElement('td');
                         celda.textContent = obj[i][j];
                         fila.appendChild(celda);
                     }
-                    if (i == 0) {
-                        tablaHeader.appendChild(fila);
-                        tabla.appendChild(tablaHeader);
-                    } else {
-                        tablaBody.appendChild(fila);
-                    } 
+                    tablaBody.appendChild(fila);
+
                 }
                 /*Array.from(obj).forEach((filaActual, i) => {
                     let fila = document.createElement('tr');
