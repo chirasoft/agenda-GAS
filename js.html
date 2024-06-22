@@ -3,8 +3,10 @@
     function crearTablaContactos() 
     {
         // para que no se duplique las tablas
-        let tabla = document.getElementById('tablaContactos');
-        if (tabla) tabla.remove();
+        eliminarTabla();
+        // crear icono de carga
+        crearLoaderPuntos('divContactos');
+        //lee datos
         google.script.run
             .withSuccessHandler(crearTblaContactoCorrectamente)
             .withFailureHandler(crearTablaContactosError)
@@ -47,12 +49,16 @@
         document.getElementById('divContactos').appendChild(tabla);
         //mostrar notificacion de ok
         crearNotificacionOk( 'Datos cargados correctamente', 'Contactos');
+        //elimar icono de carga
+        eliminarLoader();
     }
 
     function crearTablaContactosError() 
     {
         //mostrar notificacion de error
         crearNotificacionError('Hubo un error de carga de datos', 'Contactos');
+        //elimna icono de carga
+        eliminarLoader();
     }
 //funciones notificacion
     function crearNotificacion(mensaje,titulo) 
@@ -89,6 +95,7 @@
         document.getElementById('iconoNotificacion').className = '';
         document.getElementById('iconoNotificacion').classList.add('bi', 'bi-check2-square');
     }
+    
     function crearIconoNotificacionError()
     {
         document.getElementById('iconoNotificacion').className = '';
@@ -106,5 +113,40 @@
         let elementoNotificacion = document.getElementById('notificacion');
         elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
     }
+//funcion de icono de carga de datos
+    function crearLoader(elementoPadre)
+    {
+        eliminarLoader();
+        let loader = document.createElement('div');
+        loader.id='loader';
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        return document.getElementById(elementoPadre).appendChild(loader);    
+    }
+  
+    function crearLoaderPuntos(elementoPadre)
+    {
+       let loader = crearLoader(elementoPadre);
+       loader.classList.add('lds-ellipsis');
+    }
 
+    function crearLoaderAnillo(elementoPadre)
+    {
+        let loader = crearLoader(elementoPadre);
+        loader.classList.add('lds-ring');
+    }
+//para desaparecer icono de carga
+    function eliminarLoader()
+    {
+        let loader = document.getElementById('loader');
+        if (loader) loader.remove();
+    }
+//funcion tabla
+    function eliminarTabla() 
+    {
+        let tabla = document.getElementById('tablaContactos');
+        if (tabla) tabla.remove();
+    }
 </script>
