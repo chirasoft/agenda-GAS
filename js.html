@@ -1,5 +1,43 @@
 <script>
+//para insertar contactos en la hoja sheet
+    function insertarContacto()
+    {
+      // obtener datos del formulario
+      let nombre = document.getElementById('nombreContacto').value;
+      let correo = document.getElementById('correoContacto').value;
+      //limpiar la pantalla de la tabla
+      eliminarTabla();
+      // crear icono de carga
+      crearLoaderPuntos('divContactos');
+      //lee datos
+      google.script.run
+          .withSuccessHandler(contactoInsertadoCorrectamente)
+          .withFailureHandler(contactoInsertadoError)
+          .insertarContactoGs(nombre,correo);
+    }
 
+    function contactoInsertadoCorrectamente()
+    {
+      // eliminamos los datos de los input
+      document.getElementById('nombreContacto').value ='';
+      document.getElementById('correoContacto').value ='';
+      // mostrar notificacion
+      crearNotificacionOk('Contacto insertado correctamente','Incluir contacto');
+      //eliminar loader
+      eliminarLoader();
+      // pintar la tabla de nuevo
+      crearTablaContactos();
+    }
+    function contactoInsertadoError()
+    {
+      crearIconoNotificacionError('No se ha podido crear contacto', 'Error');
+      //eliminar loader
+      eliminarLoader();
+      // pintar la tabla de nuevo
+      crearTablaContactos();
+    }
+
+//para pintar la tabla de contactos
     function crearTablaContactos() 
     {
         // para que no se duplique las tablas
