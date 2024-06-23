@@ -5,6 +5,8 @@
       // obtener datos del formulario
       let nombre = document.getElementById('nombreContacto').value;
       let correo = document.getElementById('correoContacto').value;
+      //cerrar ventana modal
+      bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
       //limpiar la pantalla de la tabla
       eliminarTabla();
       // crear icono de carga
