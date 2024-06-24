@@ -4,7 +4,9 @@
     {
       // obtener datos del formulario
       let nombre = document.getElementById('nombreContacto').value;
+      let apellidos = document.getElementById('apellidosContacto').value;
       let correo = document.getElementById('correoContacto').value;
+      let telefono = document.getElementById('telefonoContacto').value;
       //cerrar ventana modal
       bootstrap.Modal.getInstance(document.getElementById('crearContactoModal')).hide();
       //limpiar la pantalla de la tabla
@@ -15,14 +17,16 @@
       google.script.run
           .withSuccessHandler(contactoInsertadoCorrectamente)
           .withFailureHandler(contactoInsertadoError)
-          .insertarContactoGs(nombre,correo);
+          .insertarContactoGs(nombre,apellidos,correo,telefono);
     }
 
     function contactoInsertadoCorrectamente()
     {
       // eliminamos los datos de los input
       document.getElementById('nombreContacto').value ='';
+      document.getElementById('apellidosContacto').value ='';
       document.getElementById('correoContacto').value ='';
+      document.getElementById('telefonoContacto').value ='';
       // mostrar notificacion
       crearNotificacionOk('Contacto insertado correctamente','Incluir contacto');
       //eliminar loader

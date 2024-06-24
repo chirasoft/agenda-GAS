@@ -34,7 +34,7 @@
 
    <!-- Modal para agregar contactos -->
    <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class=" modal-lg    modal-dialog">
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title" id="tituloCrearContactoModal">Crear Contactos</h5>
@@ -42,14 +42,23 @@
             <!-- formulario de crar contactos-->
             <form onsubmit="insertarContacto()" id="formularioIngresoContactos" method="dialog">
                <div class="modal-body">
-                  <div class="mb-3">
-                     <label for="nombreContacto" class="form-label"> Digita el nombre del contacto</label>
-                     <input type="text" class="form-control" name="nombreContacto" id="nombreContacto" required>
+                  <!-- Nombre y apellidos-->
+                  <div class="row mb-3">
+                     <div class=" col-4">
+                        <label for="nombreContacto" class="form-label"> Nombre</label>
+                        <input type="text" class="form-control" name="nombreContacto" id="nombreContacto"  pattern="[\D]*" title="Acepta solo letras">
+                     </div>
+                     <div class="col-8">
+                        <label for="apellidos" class="form-label"> Apellidos</label>
+                        <input type="text" class="form-control" name="apellidosContacto" id="apellidosContacto" pattern="[\D]*" title="Acepta solo letras"required>
+                     </div>
                   </div>
-
-                  <div class="mb-3">
-                     <label for="correoContacto" class="form-label">Digita el correo del contacto</label>
-                     <input type="email" class="form-control" name="correoContacto" id="correoContacto" required>
+                  <!-- correo y telefono-->
+                  <div class="input-group mb-3">
+                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                     <input type="email" class="form-control me-4 " name="correoContacto" id="correoContacto" required>
+                     <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                     <input type="tel" class="form-control" name="telefonoContacto" id="telefonoContacto"  pattern="[\d]{8,11}" title="Solo numerales de 8 a 11 digitos"required>
                   </div>
                </div>
                <div class="modal-footer">
