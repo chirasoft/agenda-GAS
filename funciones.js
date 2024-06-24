@@ -26,3 +26,7 @@ function insertarContactoGs (nombre,apellidos,correo,telefono)
 {
     HOJA.appendRow([nombre,apellidos,correo,telefono]);
 }
+function borrarContactoGs(fila)
+{
+   HOJA.deleteRow(fila);
+}
