@@ -85,7 +85,7 @@
                 fila.appendChild(celda);
             }
             //agregar celdas y botones de opciones a cada fila
-            fila.appendChild(crearCeldaBotones(i+1));
+            fila.appendChild(crearCeldaBotones(i + 1, obj[i]));
             tablaBody.appendChild(fila);
 
         }
@@ -103,7 +103,7 @@
         eliminarLoader();
     }
     //agregar a las filas de la tabla botones de opciones
-    function crearCeldaBotones(numFila) {
+    function crearCeldaBotones(numFila, datosContacto) {
         //crear celda
         let celda = document.createElement('td');
         celda.classList.add('text-center');
@@ -115,18 +115,18 @@
 
         // agregar botones a la celda
         let iconoBorrar = document.createElement('i');
-        iconoBorrar.classList.add('bi','bi-trash');
+        iconoBorrar.classList.add('bi', 'bi-trash');
         botonBorrar.appendChild(iconoBorrar);
 
         //crear boton modificar
-        let botonModificar =document.createElement('button');
-        //botonModificar.onclick =()=> modificarContacto(numFila);
+        let botonModificar = document.createElement('button');
+        botonModificar.onclick = () => abrirModalModificarContacto(numFila, datosContacto);
         botonModificar.classList.add('btn', 'btn-warning', 'm-1');
 
-       // agregar botones a la celda
-       let iconoModificar = document.createElement('i');
-       iconoModificar.classList.add('bi','bi-pencil-square');
-       botonModificar.appendChild(iconoModificar);
+        // agregar botones a la celda
+        let iconoModificar = document.createElement('i');
+        iconoModificar.classList.add('bi', 'bi-pencil-square');
+        botonModificar.appendChild(iconoModificar);
 
         //agregar los botones a la tabla
         celda.appendChild(botonBorrar);
@@ -134,6 +134,96 @@
 
         return celda;
     }
+    // crea la ventana modal para crear contacto
+    function abrirModalCrearContacto()
+    {
+        //boton crear
+        let boton = document.getElementById('botonCrearModificar');
+        boton.textContent = 'Crear Contacto';
+        boton.classList = '';
+        boton.classList.add('bnt', 'btn-success');
+
+        //cambiar titulo modal
+        document.getElementById('tituloCrearContactoModal').textContent = 'Crear contacto';
+
+        // modificar submit
+        document.getElementById('formularioIngresoContactos').onsubmit = () => insertarContacto();
+
+        //obtener datos contactos actuales
+        document.getElementById('nombreContacto').value = '';
+        document.getElementById('apellidosContacto').value ='';
+        document.getElementById('correoContacto').value = '';
+        document.getElementById('telefonoContacto').value = '';
+
+        //abril modal de modificacion
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();        
+    }
+    //crea la ventana modal para modificar contacto
+    function abrirModalModificarContacto(numFila, datosContacto) {
+        //boton modificar
+        let boton = document.getElementById('botonCrearModificar');
+        boton.textContent = 'Modificar';
+        boton.classList = '';
+        boton.classList.add('bnt', 'btn-warning');
+
+        //cambiar titulo modal
+        document.getElementById('tituloCrearContactoModal').textContent = 'Modificar contacto';
+
+        // modificar submit
+        document.getElementById('formularioIngresoContactos').onsubmit = () => modificarContacto(numFila);
+
+        //obtener datos contactos actuales
+        document.getElementById('nombreContacto').value = datosContacto[0];
+        document.getElementById('apellidosContacto').value = datosContacto[1];
+        document.getElementById('correoContacto').value = datosContacto[2];
+        document.getElementById('telefonoContacto').value = datosContacto[3];
+
+        //abril modal de modificacion
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
+    }
+    // borrar los contactos de una fila
+    function modificarContacto(fila) {
+        //cerrar modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).hide();
+
+        // obtener nuevos datos a partir del formulario
+        let nombre = document.getElementById('nombreContacto').value;
+        let apellidos = document.getElementById('apellidosContacto').value;
+        let correo = document.getElementById('correoContacto').value;
+        let telefono = document.getElementById('telefonoContacto').value;
+
+        //elimina la tabla
+        eliminarTabla();
+
+        // crear icono de carga
+        crearLoaderPuntos('divContactos');
+
+        //lee datos
+        google.script.run
+            .withSuccessHandler(contactoModificadoCorrectamente)
+            .withFailureHandler(contactoModificadoError)
+            .modificarContactoGs(fila,{nombre,apellidos,correo,telefono});
+    }
+
+    // funcion si se modificacion los datos correctamente
+    function contactoModificadoCorrectamente() {
+        // mostrar notificacion
+        crearNotificacionOk('Contacto modificado correctamente', 'modificar contacto');
+        //eliminar loader
+        eliminarLoader();
+        // pintar la tabla de nuevo
+        crearTablaContactos();
+    }
+
+    // funcion si hay un error al modificar el contacto
+    function contactoModificadoError() {
+        crearIconoNotificacionError('No se ha podido modificar el contacto', 'Error');
+        //eliminar loader
+        eliminarLoader();
+        // pintar la tabla de nuevo
+        crearTablaContactos();
+    }
+
     // borrar los contactos de una fila
     function borrarContacto(fila) {
         eliminarTabla();
@@ -169,7 +259,7 @@
     //funciones notificacion
     function crearNotificacion(mensaje, titulo) {
         document.getElementById('MensajeNotificacion').textContent = mensaje;
-        document.getElementById('tituloNotificacion').textContent = titulo;
+        document.getElementById('tituloModalNotificaciones').textContent = titulo;
         let elementoNotificacion = document.getElementById('notificacion');
         bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
     }

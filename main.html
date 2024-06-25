@@ -4,8 +4,8 @@
    <div class="d-flex justify-content-center my-3">
       <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"> Mostrar Contactos</button>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
-         Nuevo Contactos
+      <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">
+         Crear Contacto
       </button>
    </div>
    <!-- Tabla contactos-->
@@ -22,7 +22,7 @@
 
          <div class="toast-header p-0">
             <div class="icono-notificacion"><i id="iconoNotificacion"></i></div>
-            <strong class="me-auto" id="tituloNotificacion"></strong>
+            <strong class="me-auto" id="tituloModalNotificaciones"></strong>
             <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
          </div>
 
@@ -63,7 +63,7 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-success">Crear contacto</button>
+                  <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear contacto</button>
                </div>
             </form>
          </div>
