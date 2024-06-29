@@ -1,72 +1,60 @@
 <main>
 
-   <!-- Botones-->
-   <div class="d-flex justify-content-center my-3">
-      <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"> Mostrar Contactos</button>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">
+  <!-- Botones-->
+  <div class="d-flex justify-content-center my-3">
+    <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()"> Mostrar Contactos</button>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">
          Crear Contacto
       </button>
-   </div>
-   <!-- Tabla contactos-->
-   <div class="container col-12 col-lg-6 mb-4 w-50 d-flex justify-content-center" id="divContactos">
+  </div>
+  <!-- Tabla contactos-->
+  <div class="container col-12 col-lg-6 mb-4 w-50 d-flex justify-content-center" id="divContactos">
 
-   </div>
+  </div>
 
-   <!-- notificaciones-->
+  <!-- notificaciones-->
+  <div class="div-notificaciones position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container" id="contenedorNotificaciones">
+      <!-- aqui van las notificaciones-->
+    </div>
+  </div>
 
-   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-      <!-- toast-->
-      <div id="notificacion" class="toast align-items-center text-white  border-0" role="alert" aria-live="assertive"
-         aria-atomic="true">
-
-         <div class="toast-header p-0">
-            <div class="icono-notificacion"><i id="iconoNotificacion"></i></div>
-            <strong class="me-auto" id="tituloModalNotificaciones"></strong>
-            <button type="button" class="btn-close m-2" data-bs-dismiss="toast" aria-label="Close"></button>
-         </div>
-
-         <div class="toast-body" id="MensajeNotificacion">
-
-         </div>
-      </div>
-   </div>
-
-   <!-- Modal para agregar contactos -->
-   <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class=" modal-lg    modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="tituloCrearContactoModal">Crear Contactos</h5>
+  <!-- Modal para agregar contactos -->
+  <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-lg    modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloCrearContactoModal">Crear Contactos</h5>
+        </div>
+        <!-- formulario de crar contactos-->
+        <form onsubmit="insertarContacto()" id="formularioIngresoContactos" method="dialog">
+          <div class="modal-body">
+            <!-- Nombre y apellidos-->
+            <div class="row mb-3">
+              <div class=" col-4">
+                <label for="nombreContacto" class="form-label"> Nombre</label>
+                <input type="text" class="form-control" name="nombreContacto" id="nombreContacto"  pattern="[\D]*" title="Acepta solo letras">
+              </div>
+              <div class="col-8">
+                <label for="apellidos" class="form-label"> Apellidos</label>
+                <input type="text" class="form-control" name="apellidosContacto" id="apellidosContacto" pattern="[\D]*" title="Acepta solo letras"required>
+              </div>
             </div>
-            <!-- formulario de crar contactos-->
-            <form onsubmit="insertarContacto()" id="formularioIngresoContactos" method="dialog">
-               <div class="modal-body">
-                  <!-- Nombre y apellidos-->
-                  <div class="row mb-3">
-                     <div class=" col-4">
-                        <label for="nombreContacto" class="form-label"> Nombre</label>
-                        <input type="text" class="form-control" name="nombreContacto" id="nombreContacto"  pattern="[\D]*" title="Acepta solo letras">
-                     </div>
-                     <div class="col-8">
-                        <label for="apellidos" class="form-label"> Apellidos</label>
-                        <input type="text" class="form-control" name="apellidosContacto" id="apellidosContacto" pattern="[\D]*" title="Acepta solo letras"required>
-                     </div>
-                  </div>
-                  <!-- correo y telefono-->
-                  <div class="input-group mb-3">
-                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                     <input type="email" class="form-control me-4 " name="correoContacto" id="correoContacto" required>
-                     <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                     <input type="tel" class="form-control" name="telefonoContacto" id="telefonoContacto"  pattern="[\d]{8,11}" title="Solo numerales de 8 a 11 digitos"required>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear contacto</button>
-               </div>
-            </form>
-         </div>
+            <!-- correo y telefono-->
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control me-4 " name="correoContacto" id="correoContacto" required>
+              <span class="input-group-text"><i class="bi bi-phone"></i></span>
+              <input type="tel" class="form-control" name="telefonoContacto" id="telefonoContacto"  pattern="[\d]{8,11}" title="Solo numerales de 8 a 11 digitos"required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear contacto</button>
+          </div>
+        </form>
       </div>
-   </div>
+    </div>
+  </div>
 </main>

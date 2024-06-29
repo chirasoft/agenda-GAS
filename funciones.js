@@ -32,6 +32,6 @@ function borrarContactoGs(fila)
 }
 function modificarContactoGs(fila,datos)
 {
-    let celdas = HOJA.getActiveRange('A'+fila+':D'+fila);
+    let celdas = HOJA.getRange('A'+fila+':D'+fila);
     celdas.setValues([[datos.nombre,datos.apellidos,datos.correo,datos.telefono]]);
 }
