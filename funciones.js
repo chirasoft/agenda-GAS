@@ -35,3 +35,14 @@ function modificarContactoGs(fila,datos)
     let celdas = HOJA.getRange('A'+fila+':D'+fila);
     celdas.setValues([[datos.nombre,datos.apellidos,datos.correo,datos.telefono]]);
 }
+function importarContactosGs()
+{
+    let url = 'https://randomuser.me/api/?results=5&inc=name,email,phone';
+    let respuesta = UrlFetchApp.fetch(url).getContentText();
+    let datos= JSON.parse(respuesta);
+    datos.results.forEach(insertContactoJSON);
+}
+function insertContactoJSON(contacto)
+{
+  HOJA.appendRow([contacto.name.first,contacto.name.last,contacto.email,contacto.phone]);
+}

@@ -3,25 +3,28 @@
 
 <head>
   <!-- se encarga de identificar la url base para todas las direcciones de nuestra app -->
-    <base target="_top"> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Archivo CSS y Boostrap-->
-    <?!= obtenerDatosHtml('css'); ?>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Archivo CSS y Boostrap-->
+  <?!= obtenerDatosHtml('css'); ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <!-- Archivo Cabecera-->
-    <?!= obtenerDatosHtml('header'); ?>
+<body>
+  <!-- Archivo Cabecera-->
+  <?!= obtenerDatosHtml('header'); ?>
 
-    <!-- Archivo Principal-->
-    <?!= obtenerDatosHtml('main'); ?>
+  <!-- Archivo Principal-->
+  <?!= obtenerDatosHtml('main'); ?>
 
-    <!-- Archivo Pie de pagina-->
-    <?!= obtenerDatosHtml('footer'); ?>
-    
-    <!-- Archivo JS-->
-    <?!= obtenerDatosHtml('js'); ?>
+  <!-- Archivo Pie de pagina-->
+  <?!= obtenerDatosHtml('footer'); ?>
+
+  <!-- Archivo JS-->
+  <?!= obtenerDatosHtml('js'); ?>
+
+  <!-- Archivo notificacion-->
+  <?!= obtenerDatosHtml('notificaciones'); ?>
 </body>
 
 </html>
