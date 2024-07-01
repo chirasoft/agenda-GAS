@@ -83,6 +83,16 @@
                 let celda = document.createElement('td');
                 celda.textContent = obj[i][j];
                 fila.appendChild(celda);
+
+                // si es el quinto elemento que corresponde al imagen
+                if (j== 4){
+                    //creamos la imagen
+                    celda.textContent='';
+                    let imagen =document.createElement('img');
+                    imagen.classList.add('img-fluid','rounded');
+                    imagen.src = obj[i][j];
+                    celda.appendChild(imagen);
+                }
             }
             //agregar celdas y botones de opciones a cada fila
             fila.appendChild(crearCeldaBotones(i + 1, obj[i]));
