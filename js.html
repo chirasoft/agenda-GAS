@@ -1,4 +1,23 @@
 <script>
+    // boton subir
+    window.addEventListener('scroll',function(){
+        if(this.window.scrollY>500)
+        {
+            document.getElementById('botonSubir').style.transform="scale(1)";
+        }
+        if(this.window.scrollY<500)
+        {
+            document.getElementById('botonSubir').style.transform="scale(0)";
+        }        
+    })
+    // funciona para subir al principio
+    function subirPrincipio(){
+        //safari
+        document.body.scrollTop=0;
+        // otros navegadores
+        document.documentElement.scrollTop=0;
+
+    }
     //para insertar contactos en la hoja sheet
     function insertarContacto() {
         // obtener datos del formulario
