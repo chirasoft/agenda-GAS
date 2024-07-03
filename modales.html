@@ -1,0 +1,49 @@
+<script>
+    // crea la ventana modal para crear contacto
+    function abrirModalCrearContacto() {
+        //boton crear
+        let boton = document.getElementById('botonCrearModificar');
+        boton.textContent = 'Crear Contacto';
+        boton.classList = '';
+        boton.classList.add('bnt', 'btn-success');
+
+        //cambiar titulo modal
+        document.getElementById('tituloCrearContactoModal').textContent = 'Crear contacto';
+
+        // modificar submit
+        document.getElementById('formularioIngresoContactos').onsubmit = () => insertarContacto();
+
+        //obtener datos contactos actuales
+        document.getElementById('nombreContacto').value = '';
+        document.getElementById('apellidosContacto').value = '';
+        document.getElementById('correoContacto').value = '';
+        document.getElementById('telefonoContacto').value = '';
+
+        //abril modal de modificacion
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
+    }
+    //crea la ventana modal para modificar contacto
+    function abrirModalModificarContacto(numFila, datosContacto) {
+        //boton modificar
+        let boton = document.getElementById('botonCrearModificar');
+        boton.textContent = 'Modificar';
+        boton.classList = '';
+        boton.classList.add('bnt', 'btn-warning');
+
+        //cambiar titulo modal
+        document.getElementById('tituloCrearContactoModal').textContent = 'Modificar contacto';
+
+        // modificar submit
+        document.getElementById('formularioIngresoContactos').onsubmit = () => modificarContacto(numFila);
+
+        //obtener datos contactos actuales
+        document.getElementById('nombreContacto').value = datosContacto.nombre;
+        document.getElementById('apellidosContacto').value = datosContacto.apellidos;
+        document.getElementById('correoContacto').value = datosContacto.correo;
+        document.getElementById('telefonoContacto').value = datosContacto.telefono;
+
+        //abril modal de modificacion
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
+    }
+    
+</script>
